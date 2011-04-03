@@ -229,9 +229,6 @@ domline.createDomLine = function(nonEmpty, doesWrap, optBrowser, optDocument) {
     plugins_.callHook(
         "aceCreateStructDomLine", {domline:domline, cls:cls, attributes: attributes}
     ).map(function(modifier){ 
-        if(modifier.cls){
-            cls += modifier.cls;
-        }
         if(modifier.attStr !== undefined){
             attStr += modifier.attStr; 
         }
