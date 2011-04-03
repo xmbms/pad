@@ -4123,13 +4123,7 @@ function OUTER(gscope) {
 
   function getLineListType(lineNum) {
     // get "list" attribute of first char of line
-    var aline = rep.alines[lineNum];
-    if (aline) {
-      var opIter = Changeset.opIterator(aline);
-      if (opIter.hasNext()) {
-        return Changeset.opAttributeValue(opIter.next(), 'list', rep.apool) || '';
-      }
-    }
+    var ret = getLineAttribute(lineNum, "list");
     return '';
   }
 
@@ -4147,29 +4141,23 @@ function OUTER(gscope) {
       buildKeepRange(builder, loc, (loc = [lineNum,0]));
       if (getLineListType(lineNum)) {
         // already a line marker
-        //if (listType) {
+        if (listType) {
           // make different list type
           buildKeepRange(builder, loc, (loc = [lineNum,1]),
                          [['list',listType]], rep.apool);
-       // }
-       // else {
+        }
+        else {
           // remove list marker
-          //buildRemoveRange(builder, loc, (loc = [lineNum,1]));
-       // }
+          buildRemoveRange(builder, loc, (loc = [lineNum,1]));
+        }
       }
       else {
         // currently no line marker
-        if (listType){
-          var style = getLineAttribute(lineNum, "list"); 
-          if("ace-none-linestyle" == style) {
-              // add a line marker
-             builder.insert(lineMarker, [['author', thisAuthor],
+        if (listType) {
+          // add a line marker
+          builder.insert(lineMarker, [['author', thisAuthor],
                                ['insertorder', 'first'],
                                ['list', listType]], rep.apool);
-          } else if ("ace-linestyle" == style){
-             buildKeepRange(builder, loc, (loc = [lineNum,1]),
-                         [['list',listType]], rep.apool);
-          }
         }
       }
     }
