@@ -81,7 +81,7 @@ domline.createDomLine = function(nonEmpty, doesWrap, optBrowser, optDocument) {
           //may only used for style
           var temp = "";
           for(var j in attrs[i]){
-            temp = j + ":" + attrs[i][j] + ";";
+            temp = temp + j + ":" + attrs[i][j] + ";";
           }  
           str += temp;
        }else{

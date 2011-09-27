@@ -521,6 +521,9 @@ var richTextClient = {
     formatStyleName : function(name){
        return (name || "").replace(/\-(.)?/g,function(_, s){return s.toUpperCase()})
     },
+    getCSSRuleName : function(name){
+       return (name || "").replace(/([A-Z])/g,function(_, s){return '-' + s.toLowerCase()})
+    },
     isStyledBlockElement : function(tagName){
         var tagLists = ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote"];
         var tagReg = new RegExp(tagLists.join("|"));
@@ -541,7 +544,7 @@ var richTextClient = {
             }
             if( "div" == tname &&  -1 == (args.cls || "").indexOf("ace-line")){
                 if(!style) return ;
-                var lists = ["text-align"], name;
+                var lists = ["text-align", "margin-left", "text-indent"], name;
                 for(var i = 0, len = lists.length; i < len; i++){
                     name = lists[i];
                     if(style[name]){
@@ -664,13 +667,16 @@ var richTextClient = {
                         blockref.push(temp);
                         break;
                     case "textAlign":
+                    case "marginLeft":
+                    case "textIndent":
                         temp = {
                             tag : "div", 
                             attrs : {
                                 style : {}
                             }
                         };
-                        temp.attrs.style = {"text-align" : pool[1]};
+                        cmd = richTextClient.getCSSRuleName(pool[0])
+                        temp.attrs.style[ cmd ] = pool[1];
                         blockref.push(temp);
                         break;
                 } 

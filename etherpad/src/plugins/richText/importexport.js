@@ -216,7 +216,7 @@ function collectContentPre(args){
           }
       } else if(isBlockElement(tname)){
           if(style) {
-            var lists = ["text-align"], name;
+            var lists = ["text-align", "margin-left", "text-indent"], name;
             for(var i = 0, len = lists.length; i < len; i++){
               name = lists[i];
               if(style[name]){
