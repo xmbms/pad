@@ -104,7 +104,9 @@ function exportLineMarkerStyle(args){
       value = args.attributes[i].value;
       switch(name){
         case "textAlign":
-          result.extraOpenTags += "<div style=\"text-align:"+ value + "\">";
+        case "marginLeft":
+        case "textIndent":
+          result.extraOpenTags += "<div style=\"" + getCSSRuleName(name) + ":"+ value + "\">";
           result.extraCloseTags = "</div>" + result.extraCloseTags;
           break;
         case "preDefinedStyle":
