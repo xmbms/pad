@@ -544,7 +544,7 @@ var richTextClient = {
             }
             if( "div" == tname &&  -1 == (args.cls || "").indexOf("ace-line")){
                 if(!style) return ;
-                var lists = ["text-align", "margin-left", "text-indent"], name;
+                var lists = ["text-align", "margin-left", "text-indent", "line-height"], name;
                 for(var i = 0, len = lists.length; i < len; i++){
                     name = lists[i];
                     if(style[name]){
@@ -669,6 +669,7 @@ var richTextClient = {
                     case "textAlign":
                     case "marginLeft":
                     case "textIndent":
+                    case "lineHeight":
                         temp = {
                             tag : "div", 
                             attrs : {

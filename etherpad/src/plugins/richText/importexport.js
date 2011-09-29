@@ -106,6 +106,7 @@ function exportLineMarkerStyle(args){
         case "textAlign":
         case "marginLeft":
         case "textIndent":
+        case "lineHeight":
           result.extraOpenTags += "<div style=\"" + getCSSRuleName(name) + ":"+ value + "\">";
           result.extraCloseTags = "</div>" + result.extraCloseTags;
           break;
@@ -214,7 +215,7 @@ function collectContentPre(args){
           }
       } else if(isBlockElement(tname)){
           if(style) {
-            var lists = ["text-align", "margin-left", "text-indent"], name;
+            var lists = ["text-align", "margin-left", "text-indent", "line-height"], name;
             for(var i = 0, len = lists.length; i < len; i++){
               name = lists[i];
               if(style[name]){
